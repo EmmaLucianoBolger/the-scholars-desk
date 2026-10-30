@@ -1,0 +1,2201 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Scholar's Desk</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+            <h2>The Scholar's Desk</h2>
+            <p>Your personal study sanctuary</p>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Main navigation">
+
+            <ul>
+                <li><a href="#dashboard" class="active">Dashboard</a></li>
+                <li><a href="#tasks">My Tasks</a></li>
+                <li><a href="#focus-page">Focus Room</a></li>
+                <li><a href="#calendar">Calendar</a></li>
+                <li><a href="#library">My Library</a></li>
+                <li><a href="#journal">Study Journal</a></li>
+            </ul>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="#settings">Settings</a>
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================
+         MAIN APPLICATION
+    ====================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================
+             DASHBOARD PAGE
+        ================================== -->
+
+        <section id="dashboard" class="page">
+
+            <header class="dashboard-header">
+
+                <div>
+                    <p class="eyebrow" id="current-date"></p>
+
+                    <h1>Welcome back, Scholar.</h1>
+
+                    <p class="subtitle">
+                        A quiet space for your brightest ideas.
+                    </p>
+                </div>
+
+                <div class="header-decoration">✦</div>
+
+            </header>
+
+
+            <!-- Dashboard Statistics -->
+
+            <section class="stats-grid">
+
+                <article class="stat-card">
+                    <p class="card-label">TOTAL FOCUS TIME</p>
+                    <h2 id="total-focus">0h 00m</h2>
+                    <p class="card-note">Every minute counts.</p>
+                </article>
+
+                <article class="stat-card">
+                    <p class="card-label">TASKS COMPLETED</p>
+                    <h2 id="tasks-completed">0 / 0</h2>
+                    <p class="card-note">
+                        Progress, one task at a time.
+                    </p>
+                </article>
+
+                <article class="stat-card">
+                    <p class="card-label">STUDY SESSIONS</p>
+                    <h2 id="session-count">0</h2>
+                    <p class="card-note">
+                        Keep your momentum going.
+                    </p>
+                </article>
+
+            </section>
+
+
+            <!-- Dashboard Widgets -->
+
+            <section class="dashboard-grid">
+
+
+                <!-- Focus Timer Widget -->
+
+                <article class="widget focus-widget" id="focus">
+
+                    <div class="widget-heading">
+
+                        <div>
+                            <p class="eyebrow">THE ART OF FOCUS</p>
+                            <h2>Focus Timer</h2>
+                        </div>
+
+                        <span class="widget-symbol">◷</span>
+
+                    </div>
+
+                    <div class="timer-display">
+
+                        <span id="timer">25:00</span>
+
+                        <p>
+                            Time to make something wonderful.
+                        </p>
+
+                    </div>
+
+                    <div class="timer-controls">
+
+                        <button id="start-timer" type="button">
+                            Begin Focus
+                        </button>
+
+                        <button
+                            id="reset-timer"
+                            type="button"
+                            class="secondary-button"
+                        >
+                            Reset
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Dashboard Task Widget -->
+
+                <article class="widget tasks-widget">
+
+                    <div class="widget-heading">
+
+                        <div>
+                            <p class="eyebrow">
+                                YOUR DAILY INTENTIONS
+                            </p>
+
+                            <h2>Today's Priorities</h2>
+                        </div>
+
+                        <span class="widget-symbol">✧</span>
+
+                    </div>
+
+                    <form id="task-form" class="task-form">
+
+                        <input
+                            type="text"
+                            id="task-input"
+                            placeholder="Write a new task..."
+                            aria-label="New task"
+                            required
+                        >
+
+                        <button type="submit">Add</button>
+
+                    </form>
+
+                    <ul id="task-list" class="task-list"></ul>
+
+                    <p id="empty-tasks" class="empty-message">
+                        A blank page full of possibilities.
+                    </p>
+
+                </article>
+
+            </section>
+
+
+            <!-- Inspiration Widget -->
+
+            <section class="widget quote-widget">
+
+                <p class="eyebrow">
+                    A MOMENT OF INSPIRATION
+                </p>
+
+                <blockquote>
+                    "The secret of getting ahead is getting started."
+                </blockquote>
+
+                <p class="quote-author">MARK TWAIN</p>
+
+            </section>
+
+        </section>
+
+
+        <!-- =================================
+             MY TASKS / KANBAN PAGE
+        ================================== -->
+
+        <section id="tasks" class="page" hidden>
+
+            <header class="dashboard-header">
+
+                <div>
+                    <p class="eyebrow">STAY ORGANISED</p>
+
+                    <h1>My Tasks</h1>
+
+                    <p class="subtitle">
+                        Every great achievement begins with a plan.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    id="new-task-button"
+                    class="new-task-button"
+                >
+                    + New Task
+                </button>
+
+            </header>
+
+
+            <!-- Task Statistics -->
+
+            <section class="stats-grid task-stats">
+
+                <article class="stat-card">
+                    <p class="card-label">TOTAL TASKS</p>
+                    <h2 id="kanban-total">0</h2>
+                    <p class="card-note">
+                        Everything on your list.
+                    </p>
+                </article>
+
+                <article class="stat-card">
+                    <p class="card-label">IN PROGRESS</p>
+                    <h2 id="kanban-progress">0</h2>
+                    <p class="card-note">
+                        Currently in motion.
+                    </p>
+                </article>
+
+                <article class="stat-card">
+                    <p class="card-label">COMPLETED</p>
+                    <h2 id="kanban-completed">0</h2>
+                    <p class="card-note">
+                        Little victories add up.
+                    </p>
+                </article>
+
+            </section>
+
+
+            <!-- Task Search and Filters -->
+
+            <div class="kanban-toolbar">
+
+                <input
+                    type="search"
+                    id="task-search"
+                    placeholder="Search your tasks..."
+                    aria-label="Search tasks"
+                >
+
+                <select
+                    id="filter-priority"
+                    aria-label="Filter by priority"
+                >
+                    <option value="all">All Priorities</option>
+                    <option value="high">High Priority</option>
+                    <option value="medium">Medium Priority</option>
+                    <option value="low">Low Priority</option>
+                </select>
+
+                <select
+                    id="filter-subject"
+                    aria-label="Filter by subject"
+                >
+                    <option value="all">All Subjects</option>
+                </select>
+
+            </div>
+
+
+            <!-- Kanban Board -->
+
+            <section class="kanban-board" aria-label="Task board">
+
+
+                <!-- To Do Column -->
+
+                <div class="kanban-column" data-status="todo">
+
+                    <div class="kanban-column-header">
+                        <h2>To Do</h2>
+                        <span class="column-count" id="todo-count">0</span>
+                    </div>
+
+                    <div
+                        class="kanban-task-list"
+                        id="todo-list"
+                        data-status="todo"
+                    ></div>
+
+                    <p class="kanban-empty" id="todo-empty">
+                        Nothing here yet.
+                    </p>
+
+                </div>
+
+
+                <!-- In Progress Column -->
+
+                <div class="kanban-column" data-status="progress">
+
+                    <div class="kanban-column-header">
+                        <h2>In Progress</h2>
+                        <span class="column-count" id="progress-count">0</span>
+                    </div>
+
+                    <div
+                        class="kanban-task-list"
+                        id="progress-list"
+                        data-status="progress"
+                    ></div>
+
+                    <p class="kanban-empty" id="progress-empty">
+                        Ready when you are.
+                    </p>
+
+                </div>
+
+
+                <!-- Completed Column -->
+
+                <div class="kanban-column" data-status="completed">
+
+                    <div class="kanban-column-header">
+                        <h2>Completed</h2>
+                        <span
+                            class="column-count"
+                            id="completed-count"
+                        >0</span>
+                    </div>
+
+                    <div
+                        class="kanban-task-list"
+                        id="completed-list"
+                        data-status="completed"
+                    ></div>
+
+                    <p class="kanban-empty" id="completed-empty">
+                        Your victories will appear here.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+        <!-- =================================
+             FOCUS ROOM PAGE
+        ================================== -->
+
+        <section id="focus-page" class="page" hidden>
+
+            <header class="dashboard-header">
+
+                <div>
+                    <p class="eyebrow">THE ART OF DEEP WORK</p>
+
+                    <h1>The Focus Room</h1>
+
+                    <p class="subtitle">
+                        A quiet space to make every minute count.
+                    </p>
+                </div>
+
+                <div class="header-decoration">◷</div>
+
+            </header>
+
+
+            <!-- Focus Room Timer -->
+
+            <article class="widget focus-room-widget">
+
+                <div
+                    class="focus-mode-tabs"
+                    role="group"
+                    aria-label="Timer mode"
+                >
+
+                    <button
+                        type="button"
+                        class="focus-mode-button active"
+                        data-mode="focus"
+                        aria-pressed="true"
+                    >
+                        Focus
+                    </button>
+
+                    <button
+                        type="button"
+                        class="focus-mode-button"
+                        data-mode="short"
+                        aria-pressed="false"
+                    >
+                        Short Break
+                    </button>
+
+                    <button
+                        type="button"
+                        class="focus-mode-button"
+                        data-mode="long"
+                        aria-pressed="false"
+                    >
+                        Long Break
+                    </button>
+
+                </div>
+
+
+                <!-- Circular Progress Timer -->
+
+                <div class="focus-clock">
+
+                    <svg
+                        class="focus-progress"
+                        viewBox="0 0 300 300"
+                        aria-hidden="true"
+                    >
+
+                        <circle
+                            class="focus-progress-track"
+                            cx="150"
+                            cy="150"
+                            r="132"
+                        ></circle>
+
+                        <circle
+                            id="focus-progress-ring"
+                            class="focus-progress-ring"
+                            cx="150"
+                            cy="150"
+                            r="132"
+                        ></circle>
+
+                    </svg>
+
+                    <div class="focus-clock-content">
+
+                        <p class="eyebrow" id="focus-mode-label">
+                            FOCUS SESSION
+                        </p>
+
+                        <div
+                            id="focus-room-time"
+                            class="focus-room-time"
+                            role="timer"
+                        >
+                            25:00
+                        </div>
+
+                        <p
+                            id="focus-room-message"
+                            class="focus-room-message"
+                        >
+                            Time to immerse yourself.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Timer Controls -->
+
+                <div class="focus-room-controls">
+
+                    <button
+                        type="button"
+                        id="focus-room-start"
+                    >
+                        Begin Session
+                    </button>
+
+                    <button
+                        type="button"
+                        id="focus-room-reset"
+                        class="secondary-button"
+                    >
+                        Reset
+                    </button>
+
+                    <button
+                        type="button"
+                        id="focus-room-skip"
+                        class="secondary-button"
+                    >
+                        Skip
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- Focus Room Statistics -->
+
+            <section class="stats-grid focus-room-stats">
+
+                <article class="stat-card">
+                    <p class="card-label">TODAY'S FOCUS</p>
+                    <h2 id="focus-today">0h 00m</h2>
+                    <p class="card-note">
+                        Time well spent today.
+                    </p>
+                </article>
+
+                <article class="stat-card">
+                    <p class="card-label">TODAY'S SESSIONS</p>
+                    <h2 id="focus-today-sessions">0</h2>
+                    <p class="card-note">
+                        One session at a time.
+                    </p>
+                </article>
+
+                <article class="stat-card">
+                    <p class="card-label">CURRENT STREAK</p>
+                    <h2 id="focus-streak">0 days</h2>
+                    <p class="card-note">
+                        Keep your rhythm alive.
+                    </p>
+                </article>
+
+            </section>
+
+
+            <!-- Focus Preferences and History -->
+
+            <section class="dashboard-grid focus-room-bottom">
+
+
+                <!-- Timer Preferences -->
+
+                <article class="widget">
+
+                    <div class="widget-heading">
+
+                        <div>
+                            <p class="eyebrow">YOUR STUDY RHYTHM</p>
+                            <h2>Timer Preferences</h2>
+                        </div>
+
+                        <span class="widget-symbol">⚙</span>
+
+                    </div>
+
+                    <form
+                        id="focus-preferences-form"
+                        class="focus-preferences-form"
+                    >
+
+                        <div class="focus-preference-field">
+
+                            <label for="focus-duration">
+                                Focus Duration (minutes)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="focus-duration"
+                                min="1"
+                                max="180"
+                                value="25"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="focus-preference-field">
+
+                            <label for="short-break-duration">
+                                Short Break (minutes)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="short-break-duration"
+                                min="1"
+                                max="60"
+                                value="5"
+                                required
+                            >
+
+                        </div>
+
+                        <label class="focus-sound-setting">
+
+                            <input
+                                type="checkbox"
+                                id="focus-sound-enabled"
+                                checked
+                            >
+
+                            Play a sound when a session ends
+
+                        </label>
+
+                        <div class="focus-preference-field">
+
+                            <label for="long-break-duration">
+                                Long Break (minutes)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="long-break-duration"
+                                min="1"
+                                max="90"
+                                value="15"
+                                required
+                            >
+
+                        </div>
+
+                        <button type="submit">
+                            Save Preferences
+                        </button>
+
+                        <p
+                            id="focus-preferences-message"
+                            class="card-note"
+                            aria-live="polite"
+                        ></p>
+
+                    </form>
+
+                </article>
+
+
+                <!-- Session History -->
+
+                <article class="widget">
+
+                    <div class="widget-heading">
+
+                        <div>
+                            <p class="eyebrow">YOUR STUDY CHRONICLES</p>
+                            <h2>Session History</h2>
+                        </div>
+
+                        <span class="widget-symbol">✧</span>
+
+                    </div>
+
+                    <ul
+                        id="focus-session-history"
+                        class="focus-session-history"
+                    ></ul>
+
+                    <p
+                        id="focus-history-empty"
+                        class="empty-message"
+                    >
+                        Your completed sessions will appear here.
+                    </p>
+
+                </article>
+
+            </section>
+
+        </section>
+
+
+        <!-- =================================
+             CALENDAR PAGE
+        ================================== -->
+
+        <section id="calendar" class="page" hidden>
+
+            <header class="dashboard-header">
+
+                <div>
+                    <p class="eyebrow">
+                        YOUR ACADEMIC CHRONICLES
+                    </p>
+
+                    <h1>The Calendar</h1>
+
+                    <p class="subtitle">
+                        Every deadline, every intention,
+                        all in one beautiful place.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    id="calendar-new-task"
+                    class="new-task-button"
+                >
+                    + New Task
+                </button>
+
+            </header>
+
+
+            <!-- Calendar Summary -->
+
+            <section class="stats-grid calendar-stats">
+
+                <article class="stat-card">
+                    <p class="card-label">
+                        UPCOMING DEADLINES
+                    </p>
+                    <h2 id="calendar-upcoming-count">0</h2>
+                    <p class="card-note">
+                        Tasks still on the horizon.
+                    </p>
+                </article>
+
+                <article class="stat-card">
+                    <p class="card-label">
+                        DUE THIS WEEK
+                    </p>
+                    <h2 id="calendar-week-count">0</h2>
+                    <p class="card-note">
+                        Your next seven days.
+                    </p>
+                </article>
+
+                <article class="stat-card">
+                    <p class="card-label">
+                        OVERDUE TASKS
+                    </p>
+                    <h2 id="calendar-overdue-count">0</h2>
+                    <p class="card-note">
+                        A gentle reminder to catch up.
+                    </p>
+                </article>
+
+            </section>
+
+
+            <!-- Main Calendar -->
+
+            <section
+                class="widget calendar-widget"
+                aria-label="Monthly calendar"
+            >
+
+                <div class="calendar-toolbar">
+
+                    <div class="calendar-month-heading">
+
+                        <p class="eyebrow">
+                            YOUR MONTH AT A GLANCE
+                        </p>
+
+                        <h2
+                            id="calendar-month-title"
+                            aria-live="polite"
+                        >
+                            October 2026
+                        </h2>
+
+                    </div>
+
+                    <div class="calendar-navigation">
+
+                        <button
+                            type="button"
+                            id="calendar-today"
+                            class="secondary-button calendar-today-button"
+                        >
+                            Today
+                        </button>
+
+                        <button
+                            type="button"
+                            id="calendar-prev"
+                            class="secondary-button calendar-nav-button"
+                            aria-label="Previous month"
+                        >
+                            ‹
+                        </button>
+
+                        <button
+                            type="button"
+                            id="calendar-next"
+                            class="secondary-button calendar-nav-button"
+                            aria-label="Next month"
+                        >
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Priority Legend -->
+
+                <div class="calendar-legend">
+
+                    <span class="calendar-legend-item">
+                        <span class="calendar-legend-dot high"></span>
+                        High Priority
+                    </span>
+
+                    <span class="calendar-legend-item">
+                        <span class="calendar-legend-dot medium"></span>
+                        Medium Priority
+                    </span>
+
+                    <span class="calendar-legend-item">
+                        <span class="calendar-legend-dot low"></span>
+                        Low Priority
+                    </span>
+
+                    <span class="calendar-legend-item">
+                        <span class="calendar-legend-dot completed"></span>
+                        Completed
+                    </span>
+
+                </div>
+
+
+                <!-- Weekday Headings -->
+
+                <div
+                    class="calendar-weekdays"
+                    aria-hidden="true"
+                >
+                    <span>Monday</span>
+                    <span>Tuesday</span>
+                    <span>Wednesday</span>
+                    <span>Thursday</span>
+                    <span>Friday</span>
+                    <span>Saturday</span>
+                    <span>Sunday</span>
+                </div>
+
+
+                <!-- Calendar Grid -->
+
+                <div
+                    id="calendar-grid"
+                    class="calendar-grid"
+                    role="grid"
+                    aria-label="Calendar dates"
+                ></div>
+
+            </section>
+
+
+            <!-- Calendar Lower Panels -->
+
+            <section class="dashboard-grid calendar-bottom">
+
+
+                <!-- Selected Day -->
+
+                <article class="widget calendar-day-widget">
+
+                    <div class="widget-heading">
+
+                        <div>
+                            <p class="eyebrow">A CLOSER LOOK</p>
+
+                            <h2 id="calendar-selected-title">
+                                Selected Day
+                            </h2>
+                        </div>
+
+                        <span class="widget-symbol">✧</span>
+
+                    </div>
+
+                    <p
+                        id="calendar-selected-subtitle"
+                        class="calendar-day-subtitle"
+                    >
+                        Select a day to view its tasks.
+                    </p>
+
+                    <ul
+                        id="calendar-day-tasks"
+                        class="calendar-day-tasks"
+                    ></ul>
+
+                    <p
+                        id="calendar-day-empty"
+                        class="empty-message"
+                    >
+                        A peaceful day with no deadlines.
+                    </p>
+
+                    <button
+                        type="button"
+                        id="calendar-add-day-task"
+                        class="calendar-add-day-task"
+                    >
+                        + Add Task to This Day
+                    </button>
+
+                </article>
+
+
+                <!-- Upcoming Deadlines -->
+
+                <article class="widget calendar-upcoming-widget">
+
+                    <div class="widget-heading">
+
+                        <div>
+                            <p class="eyebrow">LOOKING AHEAD</p>
+                            <h2>Upcoming Deadlines</h2>
+                        </div>
+
+                        <span class="widget-symbol">◷</span>
+
+                    </div>
+
+                    <ul
+                        id="calendar-upcoming-list"
+                        class="calendar-upcoming-list"
+                    ></ul>
+
+                    <p
+                        id="calendar-upcoming-empty"
+                        class="empty-message"
+                    >
+                        Nothing approaching.
+                        Enjoy the breathing room.
+                    </p>
+
+                </article>
+
+            </section>
+
+        </section>
+
+
+        <!-- =================================
+             MY LIBRARY
+        ================================== -->
+
+        <section id="library" class="page" hidden>
+
+            <header class="dashboard-header">
+
+                <div>
+                    <p class="eyebrow">A WORLD BETWEEN PAGES</p>
+
+                    <h1>My Library</h1>
+
+                    <p class="subtitle">
+                        A home for every story worth remembering.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    id="library-add-book"
+                    class="new-task-button"
+                >
+                    + Add Book
+                </button>
+
+            </header>
+
+
+            <!-- Library Statistics -->
+
+            <section class="stats-grid library-stats">
+
+                <article class="stat-card">
+                    <p class="card-label">TOTAL BOOKS</p>
+                    <h2 id="library-total">0</h2>
+                    <p class="card-note">
+                        Your growing collection.
+                    </p>
+                </article>
+
+                <article class="stat-card">
+                    <p class="card-label">CURRENTLY READING</p>
+                    <h2 id="library-reading">0</h2>
+                    <p class="card-note">
+                        Stories unfolding.
+                    </p>
+                </article>
+
+                <article class="stat-card">
+                    <p class="card-label">BOOKS FINISHED</p>
+                    <h2 id="library-finished">0</h2>
+                    <p class="card-note">
+                        Worlds you've explored.
+                    </p>
+                </article>
+
+            </section>
+
+
+            <!-- Library Search and Filters -->
+
+            <div class="library-toolbar">
+
+                <input
+                    type="search"
+                    id="library-search"
+                    placeholder="Search your collection..."
+                    aria-label="Search books"
+                >
+
+                <div
+                    class="library-filter-tabs"
+                    role="group"
+                    aria-label="Filter books by reading status"
+                >
+
+                    <button
+                        type="button"
+                        class="library-filter active"
+                        data-filter="all"
+                        aria-pressed="true"
+                    >
+                        All Books
+                    </button>
+
+                    <button
+                        type="button"
+                        class="library-filter"
+                        data-filter="reading"
+                        aria-pressed="false"
+                    >
+                        Reading
+                    </button>
+
+                    <button
+                        type="button"
+                        class="library-filter"
+                        data-filter="want"
+                        aria-pressed="false"
+                    >
+                        Want to Read
+                    </button>
+
+                    <button
+                        type="button"
+                        class="library-filter"
+                        data-filter="finished"
+                        aria-pressed="false"
+                    >
+                        Finished
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Bookshelf -->
+
+            <section
+                class="widget library-widget"
+                aria-label="Your book collection"
+            >
+
+                <div class="widget-heading">
+
+                    <div>
+                        <p class="eyebrow">
+                            YOUR PERSONAL COLLECTION
+                        </p>
+
+                        <h2>The Bookshelf</h2>
+                    </div>
+
+                    <span class="widget-symbol">✧</span>
+
+                </div>
+
+                <div
+                    id="library-book-grid"
+                    class="library-book-grid"
+                ></div>
+
+                <div
+                    id="library-empty"
+                    class="library-empty"
+                >
+
+                    <div class="library-empty-icon">📖</div>
+
+                    <h3>Your bookshelf awaits.</h3>
+
+                    <p>
+                        Every great library begins with a single book.
+                    </p>
+
+                    <button
+                        type="button"
+                        id="library-empty-add"
+                        class="new-task-button"
+                    >
+                        Add Your First Book
+                    </button>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+        <!-- =================================
+             STUDY JOURNAL - NEW IN v0.7
+        ================================== -->
+
+        <section id="journal" class="page" hidden>
+
+            <header class="dashboard-header">
+
+                <div>
+                    <p class="eyebrow">
+                        THE ARCHIVE OF KNOWLEDGE
+                    </p>
+
+                    <h1>Study Journal</h1>
+
+                    <p class="subtitle">
+                        A place for everything you learn,
+                        discover, and wish to remember.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    id="journal-new-note"
+                    class="new-task-button"
+                >
+                    + New Note
+                </button>
+
+            </header>
+
+
+            <!-- Journal Statistics -->
+
+            <section class="stats-grid journal-stats">
+
+                <article class="stat-card">
+                    <p class="card-label">TOTAL NOTES</p>
+                    <h2 id="journal-total-notes">0</h2>
+                    <p class="card-note">
+                        Your growing knowledge archive.
+                    </p>
+                </article>
+
+                <article class="stat-card">
+                    <p class="card-label">SUBJECTS</p>
+                    <h2 id="journal-subject-count">0</h2>
+                    <p class="card-note">
+                        Areas of study explored.
+                    </p>
+                </article>
+
+                <article class="stat-card">
+                    <p class="card-label">NEEDS REVISION</p>
+                    <h2 id="journal-revision-count">0</h2>
+                    <p class="card-note">
+                        Topics worth revisiting.
+                    </p>
+                </article>
+
+            </section>
+
+
+            <!-- Journal Workspace -->
+
+            <section class="journal-workspace">
+
+
+                <!-- Notes Sidebar -->
+
+                <aside
+                    class="journal-notes-panel"
+                    aria-label="Your study notes"
+                >
+
+                    <div class="journal-panel-heading">
+
+                        <div>
+                            <p class="eyebrow">YOUR ARCHIVE</p>
+                            <h2>My Notes</h2>
+                        </div>
+
+                        <span class="widget-symbol">✧</span>
+
+                    </div>
+
+
+                    <!-- Search Notes -->
+
+                    <input
+                        type="search"
+                        id="journal-search"
+                        class="journal-search"
+                        placeholder="Search your notes..."
+                        aria-label="Search study notes"
+                    >
+
+
+                    <!-- Subject Filter -->
+
+                    <label
+                        for="journal-subject-filter"
+                        class="journal-filter-label"
+                    >
+                        SUBJECT
+                    </label>
+
+                    <select
+                        id="journal-subject-filter"
+                        class="journal-subject-filter"
+                    >
+                        <option value="all">All Subjects</option>
+                    </select>
+
+
+                    <!-- Note Filters -->
+
+                    <div
+                        class="journal-filter-tabs"
+                        role="group"
+                        aria-label="Filter study notes"
+                    >
+
+                        <button
+                            type="button"
+                            class="journal-filter active"
+                            data-filter="all"
+                            aria-pressed="true"
+                        >
+                            All
+                        </button>
+
+                        <button
+                            type="button"
+                            class="journal-filter"
+                            data-filter="pinned"
+                            aria-pressed="false"
+                        >
+                            Pinned
+                        </button>
+
+                        <button
+                            type="button"
+                            class="journal-filter"
+                            data-filter="revision"
+                            aria-pressed="false"
+                        >
+                            Revision
+                        </button>
+
+                    </div>
+
+
+                    <!-- Notes List -->
+
+                    <div
+                        id="journal-notes-list"
+                        class="journal-notes-list"
+                    ></div>
+
+
+                    <!-- Empty Archive -->
+
+                    <div
+                        id="journal-list-empty"
+                        class="journal-list-empty"
+                    >
+
+                        <span class="journal-empty-icon">📜</span>
+
+                        <h3>Your archive awaits.</h3>
+
+                        <p>
+                            Begin with your first study note.
+                        </p>
+
+                    </div>
+
+                </aside>
+
+
+                <!-- Main Note Editor -->
+
+                <article class="journal-editor-panel">
+
+
+                    <!-- Editor Empty State -->
+
+                    <div
+                        id="journal-editor-empty"
+                        class="journal-editor-empty"
+                    >
+
+                        <div class="journal-editor-empty-icon">
+                            ✒
+                        </div>
+
+                        <p class="eyebrow">
+                            THE BEGINNING OF SOMETHING WONDERFUL
+                        </p>
+
+                        <h2>A blank page awaits.</h2>
+
+                        <p>
+                            Select a note from your archive,
+                            or begin writing something new.
+                        </p>
+
+                        <button
+                            type="button"
+                            id="journal-empty-new-note"
+                            class="new-task-button"
+                        >
+                            + Create Your First Note
+                        </button>
+
+                    </div>
+
+
+                    <!-- Active Editor -->
+
+                    <div
+                        id="journal-editor-workspace"
+                        class="journal-editor-workspace"
+                        hidden
+                    >
+
+
+                        <!-- Editor Top Bar -->
+
+                        <div class="journal-editor-topbar">
+
+                            <div class="journal-editor-topbar-left">
+
+                                <span class="journal-document-icon">
+                                    📜
+                                </span>
+
+                                <span class="journal-document-label">
+                                    STUDY NOTE
+                                </span>
+
+                            </div>
+
+                            <div class="journal-editor-actions">
+
+                                <button
+                                    type="button"
+                                    id="journal-pin-note"
+                                    class="journal-icon-button"
+                                    title="Pin or unpin this note"
+                                    aria-label="Pin note"
+                                    aria-pressed="false"
+                                >
+                                    ♧
+                                </button>
+
+                                <button
+                                    type="button"
+                                    id="journal-export-note"
+                                    class="journal-icon-button"
+                                    title="Export this note"
+                                    aria-label="Export note"
+                                >
+                                    ↓
+                                </button>
+
+                                <button
+                                    type="button"
+                                    id="journal-delete-note"
+                                    class="journal-icon-button journal-delete-button"
+                                    title="Delete this note"
+                                    aria-label="Delete note"
+                                >
+                                    ×
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Note Metadata -->
+
+                        <div class="journal-note-metadata">
+
+                            <input
+                                type="text"
+                                id="journal-note-title"
+                                class="journal-note-title"
+                                placeholder="Untitled Note"
+                                maxlength="200"
+                                aria-label="Note title"
+                            >
+
+
+                            <div class="journal-metadata-row">
+
+                                <div class="journal-metadata-field">
+
+                                    <label for="journal-note-subject">
+                                        SUBJECT
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="journal-note-subject"
+                                        placeholder="e.g. Enterprise Network Design"
+                                        list="journal-subject-suggestions"
+                                        maxlength="100"
+                                    >
+
+                                    <datalist
+                                        id="journal-subject-suggestions"
+                                    >
+                                        <option value="Enterprise Network Design"></option>
+                                        <option value="Statistical Data Analysis"></option>
+                                        <option value="Data Communications"></option>
+                                        <option value="Cyber Security"></option>
+                                        <option value="Programming"></option>
+                                        <option value="Personal Study"></option>
+                                    </datalist>
+
+                                </div>
+
+
+                                <div class="journal-metadata-field">
+
+                                    <label for="journal-note-status">
+                                        REVISION STATUS
+                                    </label>
+
+                                    <select id="journal-note-status">
+
+                                        <option value="normal">
+                                            General Notes
+                                        </option>
+
+                                        <option value="revision">
+                                            Needs Revision
+                                        </option>
+
+                                        <option value="mastered">
+                                            Confident / Mastered
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Word-Style Formatting Toolbar -->
+
+                        <div
+                            id="journal-toolbar"
+                            class="journal-toolbar"
+                            role="toolbar"
+                            aria-label="Text formatting"
+                        >
+
+
+                            <!-- Paragraph Style -->
+
+                            <div class="journal-toolbar-group">
+
+                                <label
+                                    for="journal-text-style"
+                                    class="sr-only"
+                                >
+                                    Paragraph style
+                                </label>
+
+                                <select
+                                    id="journal-text-style"
+                                    class="journal-style-select"
+                                    aria-label="Paragraph style"
+                                >
+                                    <option value="p">
+                                        Normal Text
+                                    </option>
+
+                                    <option value="h1">
+                                        Heading 1
+                                    </option>
+
+                                    <option value="h2">
+                                        Heading 2
+                                    </option>
+
+                                    <option value="h3">
+                                        Heading 3
+                                    </option>
+
+                                    <option value="blockquote">
+                                        Quote
+                                    </option>
+                                </select>
+
+                            </div>
+
+
+                            <span class="journal-toolbar-divider"></span>
+
+
+                            <!-- Basic Formatting -->
+
+                            <div class="journal-toolbar-group">
+
+                                <button
+                                    type="button"
+                                    class="journal-format-button"
+                                    data-command="bold"
+                                    title="Bold (Ctrl+B)"
+                                    aria-label="Bold"
+                                >
+                                    <strong>B</strong>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="journal-format-button"
+                                    data-command="italic"
+                                    title="Italic (Ctrl+I)"
+                                    aria-label="Italic"
+                                >
+                                    <em>I</em>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="journal-format-button"
+                                    data-command="underline"
+                                    title="Underline (Ctrl+U)"
+                                    aria-label="Underline"
+                                >
+                                    <u>U</u>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="journal-format-button"
+                                    data-command="strikeThrough"
+                                    title="Strikethrough"
+                                    aria-label="Strikethrough"
+                                >
+                                    <s>S</s>
+                                </button>
+
+                            </div>
+
+
+                            <span class="journal-toolbar-divider"></span>
+
+
+                            <!-- Highlighting -->
+
+                            <div class="journal-toolbar-group">
+
+                                <button
+                                    type="button"
+                                    class="journal-format-button journal-highlight-button"
+                                    data-command="hiliteColor"
+                                    data-value="#D7BD83"
+                                    title="Highlight selected text"
+                                    aria-label="Highlight text"
+                                >
+                                    ✦
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="journal-format-button"
+                                    data-command="removeFormat"
+                                    title="Clear text formatting"
+                                    aria-label="Clear formatting"
+                                >
+                                    Tx
+                                </button>
+
+                            </div>
+
+
+                            <span class="journal-toolbar-divider"></span>
+
+
+                            <!-- Lists -->
+
+                            <div class="journal-toolbar-group">
+
+                                <button
+                                    type="button"
+                                    class="journal-format-button"
+                                    data-command="insertUnorderedList"
+                                    title="Bullet list"
+                                    aria-label="Bullet list"
+                                >
+                                    ☷
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="journal-format-button"
+                                    data-command="insertOrderedList"
+                                    title="Numbered list"
+                                    aria-label="Numbered list"
+                                >
+                                    1.
+                                </button>
+
+                            </div>
+
+
+                            <span class="journal-toolbar-divider"></span>
+
+
+                            <!-- Alignment -->
+
+                            <div class="journal-toolbar-group">
+
+                                <button
+                                    type="button"
+                                    class="journal-format-button"
+                                    data-command="justifyLeft"
+                                    title="Align left"
+                                    aria-label="Align left"
+                                >
+                                    ≡
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="journal-format-button"
+                                    data-command="justifyCenter"
+                                    title="Align centre"
+                                    aria-label="Align centre"
+                                >
+                                    ≣
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="journal-format-button"
+                                    data-command="justifyRight"
+                                    title="Align right"
+                                    aria-label="Align right"
+                                >
+                                    ☰
+                                </button>
+
+                            </div>
+
+
+                            <span class="journal-toolbar-divider"></span>
+
+
+                            <!-- Undo / Redo -->
+
+                            <div class="journal-toolbar-group">
+
+                                <button
+                                    type="button"
+                                    class="journal-format-button"
+                                    data-command="undo"
+                                    title="Undo"
+                                    aria-label="Undo"
+                                >
+                                    ↶
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="journal-format-button"
+                                    data-command="redo"
+                                    title="Redo"
+                                    aria-label="Redo"
+                                >
+                                    ↷
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Writing Page -->
+
+                        <div class="journal-paper-container">
+
+                            <div
+                                id="journal-note-content"
+                                class="journal-note-content"
+                                contenteditable="true"
+                                role="textbox"
+                                aria-label="Study note content"
+                                aria-multiline="true"
+                                data-placeholder="Begin writing your thoughts here..."
+                                spellcheck="true"
+                            ></div>
+
+                        </div>
+
+
+                        <!-- Editor Footer -->
+
+                        <div class="journal-editor-footer">
+
+                            <div class="journal-save-status">
+
+                                <span
+                                    id="journal-save-indicator"
+                                    class="journal-save-indicator"
+                                    aria-live="polite"
+                                >
+                                    Ready to write
+                                </span>
+
+                            </div>
+
+                            <div class="journal-editor-details">
+
+                                <span id="journal-word-count">
+                                    0 words
+                                </span>
+
+                                <span class="journal-footer-separator">
+                                    •
+                                </span>
+
+                                <span id="journal-last-edited">
+                                    Not yet edited
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- Journal Backup Controls -->
+
+            <div class="journal-backup-bar">
+
+                <div>
+                    <strong>Your notes matter.</strong>
+
+                    <p>
+                        Keep a backup of your study archive
+                        somewhere safe.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    id="journal-export-all"
+                    class="secondary-button"
+                >
+                    ↓ Export Journal Backup
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             SETTINGS PAGE
+        ================================== -->
+
+        <section id="settings" class="page" hidden>
+
+            <header class="dashboard-header">
+
+                <div>
+                    <p class="eyebrow">MAKE IT YOURS</p>
+
+                    <h1>Settings</h1>
+
+                    <p class="subtitle">
+                        Your sanctuary, your preferences.
+                    </p>
+                </div>
+
+            </header>
+
+            <article class="widget">
+
+                <h2>Preferences</h2>
+
+                <p class="subtitle">
+                    Application settings are coming soon.
+                </p>
+
+            </article>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =====================================
+     TASK EDITOR MODAL
+====================================== -->
+
+<dialog id="task-modal" class="task-modal">
+
+    <form id="kanban-task-form" class="modal-form">
+
+        <div class="modal-header">
+
+            <div>
+                <p class="eyebrow">YOUR NEXT CHAPTER</p>
+                <h2 id="task-modal-title">New Task</h2>
+            </div>
+
+            <button
+                type="button"
+                id="close-task-modal"
+                class="modal-close"
+                aria-label="Close task editor"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <input type="hidden" id="edit-task-id">
+
+        <label for="kanban-task-title">
+            Task Title
+        </label>
+
+        <input
+            type="text"
+            id="kanban-task-title"
+            placeholder="What needs to be done?"
+            maxlength="150"
+            required
+        >
+
+        <label for="kanban-task-description">
+            Description
+        </label>
+
+        <textarea
+            id="kanban-task-description"
+            rows="4"
+            placeholder="Add some notes..."
+        ></textarea>
+
+        <div class="modal-form-row">
+
+            <div class="form-field">
+
+                <label for="kanban-task-subject">
+                    Subject / Category
+                </label>
+
+                <input
+                    type="text"
+                    id="kanban-task-subject"
+                    placeholder="e.g. Cisco, Statistics"
+                    list="subject-suggestions"
+                >
+
+                <datalist id="subject-suggestions">
+                    <option value="Cisco"></option>
+                    <option value="Statistics"></option>
+                    <option value="Coding"></option>
+                    <option value="Personal"></option>
+                </datalist>
+
+            </div>
+
+            <div class="form-field">
+
+                <label for="kanban-task-priority">
+                    Priority
+                </label>
+
+                <select id="kanban-task-priority">
+                    <option value="low">Low</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="high">High</option>
+                </select>
+
+            </div>
+
+        </div>
+
+        <div class="modal-form-row">
+
+            <div class="form-field">
+
+                <label for="kanban-task-due">
+                    Due Date
+                </label>
+
+                <input
+                    type="date"
+                    id="kanban-task-due"
+                >
+
+            </div>
+
+            <div class="form-field">
+
+                <label for="kanban-task-status">
+                    Status
+                </label>
+
+                <select id="kanban-task-status">
+                    <option value="todo">To Do</option>
+                    <option value="progress">In Progress</option>
+                    <option value="completed">Completed</option>
+                </select>
+
+            </div>
+
+        </div>
+
+        <div class="modal-actions">
+
+            <button
+                type="button"
+                id="cancel-task-modal"
+                class="secondary-button"
+            >
+                Cancel
+            </button>
+
+            <button
+                type="submit"
+                id="save-kanban-task"
+            >
+                Save Task
+            </button>
+
+        </div>
+
+    </form>
+
+</dialog>
+
+
+<!-- =====================================
+     BOOK EDITOR MODAL
+====================================== -->
+
+<dialog id="book-modal" class="task-modal book-modal">
+
+    <form id="book-form" class="modal-form">
+
+        <div class="modal-header">
+
+            <div>
+                <p class="eyebrow">
+                    YOUR LITERARY COLLECTION
+                </p>
+
+                <h2 id="book-modal-title">
+                    Add a Book
+                </h2>
+            </div>
+
+            <button
+                type="button"
+                id="book-modal-close"
+                class="modal-close"
+                aria-label="Close book editor"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <input type="hidden" id="book-edit-id">
+
+
+        <label for="book-title">
+            Book Title
+        </label>
+
+        <input
+            type="text"
+            id="book-title"
+            placeholder="The title of your book"
+            maxlength="200"
+            required
+        >
+
+
+        <label for="book-author">
+            Author
+        </label>
+
+        <input
+            type="text"
+            id="book-author"
+            placeholder="Who wrote it?"
+            maxlength="150"
+            required
+        >
+
+
+        <label for="book-cover">
+            Cover Image URL (Optional)
+        </label>
+
+        <input
+            type="url"
+            id="book-cover"
+            placeholder="https://example.com/book-cover.jpg"
+        >
+
+
+        <div class="modal-form-row">
+
+            <div class="form-field">
+
+                <label for="book-status">
+                    Reading Status
+                </label>
+
+                <select id="book-status">
+
+                    <option value="want">
+                        Want to Read
+                    </option>
+
+                    <option value="reading">
+                        Currently Reading
+                    </option>
+
+                    <option value="finished">
+                        Finished
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="form-field">
+
+                <label for="book-rating">
+                    Your Rating
+                </label>
+
+                <select id="book-rating">
+
+                    <option value="0">Not Rated</option>
+                    <option value="1">★ 1 Star</option>
+                    <option value="2">★★ 2 Stars</option>
+                    <option value="3">★★★ 3 Stars</option>
+                    <option value="4">★★★★ 4 Stars</option>
+                    <option value="5">★★★★★ 5 Stars</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-form-row">
+
+            <div class="form-field">
+
+                <label for="book-total-pages">
+                    Total Pages
+                </label>
+
+                <input
+                    type="number"
+                    id="book-total-pages"
+                    min="0"
+                    step="1"
+                    value="0"
+                >
+
+            </div>
+
+            <div class="form-field">
+
+                <label for="book-current-page">
+                    Current Page
+                </label>
+
+                <input
+                    type="number"
+                    id="book-current-page"
+                    min="0"
+                    step="1"
+                    value="0"
+                >
+
+            </div>
+
+        </div>
+
+
+        <label for="book-notes">
+            Personal Notes
+        </label>
+
+        <textarea
+            id="book-notes"
+            rows="4"
+            placeholder="Your thoughts about this book..."
+        ></textarea>
+
+
+        <label for="book-quote">
+            Favourite Quote
+        </label>
+
+        <textarea
+            id="book-quote"
+            rows="3"
+            placeholder="A passage you want to remember..."
+        ></textarea>
+
+
+        <div class="modal-actions">
+
+            <button
+                type="button"
+                id="book-modal-cancel"
+                class="secondary-button"
+            >
+                Cancel
+            </button>
+
+            <button type="submit">
+                Save Book
+            </button>
+
+        </div>
+
+    </form>
+
+</dialog>
+
+</body>
+</html>

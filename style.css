@@ -1,0 +1,4015 @@
+
+/* ==========================================
+   THE SCHOLAR'S DESK
+   Version 0.4 - The Focus Room
+========================================== */
+
+/* ==========================================
+   1. COLOUR PALETTE
+========================================== */
+
+:root {
+    --bg-primary: #211A17;
+    --bg-sidebar: #352820;
+    --bg-card: #49382D;
+
+    --accent-gold: #C5A572;
+
+    --text-primary: #F0E4D0;
+    --text-muted: #B8A795;
+
+    --border-color: #65503F;
+    --hover-color: #594433;
+}
+
+/* ==========================================
+   2. GLOBAL STYLES
+========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: Georgia, "Times New Roman", serif;
+    min-height: 100vh;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* ==========================================
+   3. APPLICATION LAYOUT
+========================================== */
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 35px 20px;
+
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid #594536;
+    overflow-y: auto;
+}
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+/* ==========================================
+   4. SIDEBAR HEADER
+========================================== */
+
+.sidebar-header {
+    padding: 10px 10px 35px;
+    border-bottom: 1px solid #594536;
+}
+
+.sidebar-header h2 {
+    color: var(--accent-gold);
+    font-size: 23px;
+    font-weight: normal;
+    line-height: 1.3;
+}
+
+.sidebar-header p {
+    color: var(--text-muted);
+    font-size: 12px;
+    font-style: italic;
+    margin-top: 10px;
+    line-height: 1.6;
+}
+
+/* ==========================================
+   5. SIDEBAR NAVIGATION
+========================================== */
+
+.sidebar-nav {
+    margin-top: 35px;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+}
+
+.sidebar-nav li {
+    margin-bottom: 8px;
+}
+
+.sidebar-nav a,
+.sidebar-footer a {
+    display: block;
+    padding: 13px 16px;
+
+    color: var(--text-primary);
+    font-size: 14px;
+    border-radius: 8px;
+
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease;
+}
+
+.sidebar-nav a:hover,
+.sidebar-footer a:hover {
+    background-color: var(--bg-card);
+    color: var(--accent-gold);
+}
+
+.sidebar-nav a.active,
+.sidebar-footer a.active {
+    background-color: var(--hover-color);
+    color: var(--accent-gold);
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: 30px;
+}
+
+/* ==========================================
+   6. PAGE NAVIGATION
+========================================== */
+
+.page[hidden] {
+    display: none !important;
+}
+
+.page {
+    animation: pageFadeIn 0.3s ease;
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================
+   7. DASHBOARD HEADER
+========================================== */
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    gap: 20px;
+}
+
+.dashboard-header h1 {
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: normal;
+    line-height: 1.3;
+    margin: 12px 0;
+}
+
+.eyebrow,
+.card-label {
+    color: var(--accent-gold);
+    font-size: 11px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.header-decoration {
+    color: var(--accent-gold);
+    font-size: 50px;
+}
+
+/* ==========================================
+   8. STATISTICS CARDS
+========================================== */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 28px;
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-gold);
+}
+
+.stat-card h2 {
+    font-size: 32px;
+    font-weight: normal;
+    margin: 18px 0 10px;
+}
+
+.card-note {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* ==========================================
+   9. DASHBOARD GRID
+========================================== */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+/* ==========================================
+   10. GENERAL WIDGETS
+========================================== */
+
+.widget {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 28px;
+}
+
+.widget-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.widget-heading h2 {
+    font-size: 24px;
+    font-weight: normal;
+    margin-top: 10px;
+}
+
+.widget-symbol {
+    color: var(--accent-gold);
+    font-size: 28px;
+}
+
+/* ==========================================
+   11. DASHBOARD FOCUS TIMER
+========================================== */
+
+.timer-display {
+    text-align: center;
+    padding: 45px 0 30px;
+}
+
+#timer {
+    display: block;
+    font-size: clamp(48px, 5vw, 76px);
+    font-weight: normal;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 2px;
+}
+
+.timer-display p {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-style: italic;
+    margin-top: 12px;
+}
+
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* ==========================================
+   12. BUTTONS
+========================================== */
+
+button {
+    background-color: var(--accent-gold);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 7px;
+    padding: 12px 20px;
+    font-size: 14px;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.secondary-button {
+    background-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+/* ==========================================
+   13. DASHBOARD TASK MANAGER
+========================================== */
+
+.task-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.task-form input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px;
+
+    background-color: var(--bg-sidebar);
+    color: var(--text-primary);
+
+    border: 1px solid #80664F;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+.task-form input::placeholder {
+    color: var(--text-muted);
+}
+
+.task-form input:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+}
+
+.task-list {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.task-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.task-list li span {
+    flex: 1;
+    overflow-wrap: anywhere;
+    font-size: 14px;
+}
+
+.task-list li.completed span {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.task-list input[type="checkbox"] {
+    accent-color: var(--accent-gold);
+    cursor: pointer;
+}
+
+.delete-task {
+    padding: 5px 10px;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 20px;
+}
+
+.delete-task:hover {
+    color: var(--accent-gold);
+}
+
+.empty-message {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-style: italic;
+    margin-top: 25px;
+}
+
+/* ==========================================
+   14. INSPIRATION WIDGET
+========================================== */
+
+.quote-widget {
+    text-align: center;
+    padding: 35px;
+}
+
+.quote-widget blockquote {
+    font-size: 22px;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 20px 0;
+}
+
+.quote-author {
+    color: var(--accent-gold);
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+/* ==========================================
+   15. OTHER APPLICATION PAGES
+========================================== */
+
+.page > .widget {
+    margin-bottom: 25px;
+}
+
+.page > .widget h2 {
+    font-size: 24px;
+    font-weight: normal;
+    margin-bottom: 15px;
+}
+
+.page > .widget .subtitle {
+    margin-top: 10px;
+}
+
+/* ==========================================
+   16. KANBAN TOOLBAR
+========================================== */
+
+.new-task-button {
+    flex-shrink: 0;
+}
+
+.kanban-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.kanban-toolbar input,
+.kanban-toolbar select {
+    background-color: var(--bg-sidebar);
+    color: var(--text-primary);
+
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+
+    padding: 12px 14px;
+    font-size: 14px;
+}
+
+.kanban-toolbar input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.kanban-toolbar select {
+    min-width: 150px;
+}
+
+.kanban-toolbar input::placeholder {
+    color: var(--text-muted);
+}
+
+/* ==========================================
+   17. KANBAN BOARD
+========================================== */
+
+.kanban-board {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+}
+
+.kanban-column {
+    min-width: 0;
+    min-height: 350px;
+    padding: 18px;
+
+    background-color: var(--bg-sidebar);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+}
+
+.kanban-column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: 18px;
+    margin-bottom: 15px;
+
+    border-bottom: 1px solid var(--border-color);
+}
+
+.kanban-column-header h2 {
+    font-size: 19px;
+    font-weight: normal;
+}
+
+.column-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 28px;
+    height: 28px;
+    padding: 0 8px;
+
+    background-color: var(--hover-color);
+    color: var(--accent-gold);
+
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.kanban-task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 40px;
+}
+
+.kanban-empty {
+    margin-top: 25px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* ==========================================
+   18. KANBAN TASK CARDS
+========================================== */
+
+.kanban-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 9px;
+    padding: 18px;
+
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.kanban-card:hover {
+    border-color: var(--accent-gold);
+}
+
+.kanban-card.dragging {
+    opacity: 0.45;
+}
+
+.kanban-card-title {
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.kanban-card-description {
+    margin-top: 10px;
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.kanban-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.task-subject,
+.task-priority,
+.task-due {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 5px;
+    font-size: 11px;
+}
+
+.task-subject {
+    background-color: var(--bg-sidebar);
+    color: var(--accent-gold);
+}
+
+.task-priority {
+    background-color: #594433;
+    color: var(--text-primary);
+}
+
+.task-priority.high {
+    background-color: #70433B;
+    color: #F5C3B9;
+}
+
+.task-priority.medium {
+    background-color: #685337;
+    color: #F0D5A3;
+}
+
+.task-priority.low {
+    background-color: #425348;
+    color: #C5E0CC;
+}
+
+.task-due {
+    background-color: var(--bg-sidebar);
+    color: var(--text-muted);
+}
+
+.task-due.overdue {
+    background-color: #70433B;
+    color: #F5C3B9;
+}
+
+.kanban-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.kanban-card-actions button {
+    padding: 7px 11px;
+    font-size: 12px;
+}
+
+.kanban-edit-button {
+    background-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.kanban-delete-button {
+    background-color: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+
+.kanban-delete-button:hover {
+    color: #F5C3B9;
+    border-color: #A66A60;
+}
+
+.kanban-move-select {
+    width: 100%;
+    margin-top: 12px;
+    padding: 9px;
+
+    background-color: var(--bg-sidebar);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+/* ==========================================
+   19. DRAG AND DROP
+========================================== */
+
+.kanban-card[draggable="true"] {
+    cursor: grab;
+}
+
+.kanban-card[draggable="true"]:active {
+    cursor: grabbing;
+}
+
+.kanban-column.drag-over {
+    border-color: var(--accent-gold);
+    background-color: #403026;
+}
+
+/* ==========================================
+   20. TASK EDITOR MODAL
+========================================== */
+
+.task-modal {
+    width: min(92vw, 600px);
+    max-height: 90vh;
+    overflow-y: auto;
+
+    padding: 30px;
+    margin: auto;
+
+    background-color: var(--bg-sidebar);
+    color: var(--text-primary);
+
+    border: 1px solid var(--accent-gold);
+    border-radius: 14px;
+
+    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.5);
+}
+
+.task-modal::backdrop {
+    background-color: rgba(12, 8, 6, 0.8);
+    backdrop-filter: blur(3px);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.modal-header h2 {
+    margin-top: 10px;
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.modal-close {
+    padding: 4px 10px;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 28px;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal-form label {
+    color: var(--accent-gold);
+    font-size: 13px;
+}
+
+.modal-form input,
+.modal-form textarea,
+.modal-form select {
+    width: 100%;
+    min-width: 0;
+
+    padding: 12px;
+
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+
+    font-size: 14px;
+}
+
+.modal-form textarea {
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.modal-form input::placeholder,
+.modal-form textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.modal-form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* ==========================================
+   21. FOCUS ROOM
+========================================== */
+
+.focus-room-widget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+
+    padding: 40px 30px;
+    margin-bottom: 25px;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            #574232 0%,
+            var(--bg-card) 65%
+        );
+
+    text-align: center;
+}
+
+/* ==========================================
+   22. FOCUS MODE BUTTONS
+========================================== */
+
+.focus-mode-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.focus-mode-button {
+    background-color: var(--bg-sidebar);
+    color: var(--text-muted);
+
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+
+    padding: 11px 20px;
+}
+
+.focus-mode-button:hover {
+    color: var(--accent-gold);
+}
+
+.focus-mode-button.active {
+    background-color: var(--accent-gold);
+    color: var(--bg-primary);
+    border-color: var(--accent-gold);
+}
+
+/* ==========================================
+   23. CIRCULAR PROGRESS TIMER
+========================================== */
+
+.focus-clock {
+    position: relative;
+    width: min(100%, 330px);
+    aspect-ratio: 1 / 1;
+
+    display: grid;
+    place-items: center;
+}
+
+.focus-progress {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    transform: rotate(-90deg);
+}
+
+.focus-progress-track,
+.focus-progress-ring {
+    fill: none;
+    stroke-width: 7;
+}
+
+.focus-progress-track {
+    stroke: #6A5543;
+}
+
+.focus-progress-ring {
+    stroke: var(--accent-gold);
+    stroke-linecap: round;
+
+    stroke-dasharray: 829.38;
+    stroke-dashoffset: 0;
+
+    transition: stroke-dashoffset 0.25s linear;
+}
+
+.focus-clock-content {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 14px;
+    padding: 20px;
+}
+
+.focus-room-time {
+    font-size: clamp(48px, 6vw, 76px);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 2px;
+    line-height: 1.1;
+}
+
+.focus-room-message {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+/* ==========================================
+   24. FOCUS ROOM CONTROLS
+========================================== */
+
+.focus-room-controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.focus-room-controls button {
+    min-width: 105px;
+}
+
+/* ==========================================
+   25. TIMER PREFERENCES
+========================================== */
+
+.focus-preferences-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    margin-top: 25px;
+}
+
+.focus-preference-field {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.focus-preference-field label {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.focus-preference-field input {
+    width: 100%;
+    padding: 12px;
+
+    background-color: var(--bg-sidebar);
+    color: var(--text-primary);
+
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+
+    font-size: 14px;
+}
+
+.focus-sound-setting {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: var(--text-primary);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.focus-sound-setting input {
+    accent-color: var(--accent-gold);
+    width: 16px;
+    height: 16px;
+}
+
+.focus-preferences-form button {
+    align-self: flex-start;
+}
+
+/* ==========================================
+   26. SESSION HISTORY
+========================================== */
+
+.focus-session-history {
+    list-style: none;
+    margin-top: 25px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.focus-session-history li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+
+    padding: 15px;
+
+    background-color: var(--bg-sidebar);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.focus-history-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.focus-history-details strong {
+    font-size: 14px;
+    font-weight: normal;
+    color: var(--text-primary);
+}
+
+.focus-history-details span {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.focus-history-duration {
+    color: var(--accent-gold);
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+/* ==========================================
+   27. ACCESSIBILITY
+========================================== */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--accent-gold);
+    outline-offset: 3px;
+}
+
+/* ==========================================
+   28. RESPONSIVE LAYOUT
+========================================== */
+
+@media (max-width: 1200px) {
+
+    .kanban-board {
+        gap: 12px;
+    }
+
+    .kanban-column {
+        padding: 12px;
+    }
+
+    .kanban-card {
+        padding: 14px;
+    }
+
+}
+
+@media (max-width: 1050px) {
+
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .kanban-board {
+        grid-template-columns: 1fr;
+    }
+
+    .kanban-column {
+        min-height: 150px;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        padding: 20px;
+    }
+
+    .sidebar-header {
+        padding-bottom: 20px;
+    }
+
+    .sidebar-nav {
+        margin-top: 20px;
+    }
+
+    .sidebar-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .sidebar-nav li {
+        margin-bottom: 0;
+    }
+
+    .sidebar-nav a {
+        padding: 10px 12px;
+    }
+
+    .sidebar-footer {
+        margin-top: 10px;
+        padding-top: 10px;
+    }
+
+    .main-content {
+        padding: 24px 16px;
+    }
+
+    .dashboard-header {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .header-decoration {
+        font-size: 32px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card,
+    .widget {
+        padding: 22px;
+    }
+
+    .task-form {
+        flex-wrap: wrap;
+    }
+
+    .quote-widget blockquote {
+        font-size: 18px;
+    }
+
+    .kanban-toolbar {
+        flex-direction: column;
+    }
+
+    .kanban-toolbar input,
+    .kanban-toolbar select {
+        width: 100%;
+    }
+
+    .modal-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .task-modal {
+        padding: 20px;
+    }
+
+    .focus-room-widget {
+        padding: 25px 15px;
+    }
+
+    .focus-clock {
+        width: min(100%, 290px);
+    }
+
+    .focus-room-time {
+        font-size: 52px;
+    }
+
+}
+
+/* ==========================================
+   29. REDUCED MOTION
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+
+}
+
+/* ==========================================
+   THE SCHOLAR'S DESK
+   Version 0.5 - The Calendar
+========================================== */
+
+
+/* ==========================================
+   30. CALENDAR PAGE
+========================================== */
+
+.calendar-stats {
+    margin-bottom: 25px;
+}
+
+.calendar-widget {
+    padding: 30px;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+
+/* ==========================================
+   31. CALENDAR TOOLBAR
+========================================== */
+
+.calendar-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+.calendar-month-heading h2 {
+    color: var(--text-primary);
+    font-size: 30px;
+    font-weight: normal;
+    margin-top: 10px;
+}
+
+.calendar-navigation {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.calendar-today-button {
+    padding: 11px 20px;
+}
+
+.calendar-nav-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    padding: 0;
+    font-size: 28px;
+    line-height: 1;
+}
+
+
+/* ==========================================
+   32. CALENDAR PRIORITY LEGEND
+========================================== */
+
+.calendar-legend {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 22px;
+
+    padding: 15px 0 22px;
+    margin-bottom: 15px;
+
+    border-bottom: 1px solid var(--border-color);
+}
+
+.calendar-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.calendar-legend-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.calendar-legend-dot.high {
+    background-color: #D28D80;
+}
+
+.calendar-legend-dot.medium {
+    background-color: #E0C080;
+}
+
+.calendar-legend-dot.low {
+    background-color: #94B59D;
+}
+
+.calendar-legend-dot.completed {
+    background-color: #A99D8F;
+}
+
+
+/* ==========================================
+   33. CALENDAR WEEKDAY HEADINGS
+========================================== */
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 8px;
+
+    margin-bottom: 10px;
+}
+
+.calendar-weekdays span {
+    padding: 12px 5px;
+
+    color: var(--accent-gold);
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+
+/* ==========================================
+   34. MONTHLY CALENDAR GRID
+========================================== */
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.calendar-day {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+
+    min-width: 0;
+    min-height: 125px;
+    padding: 12px;
+
+    background-color: var(--bg-sidebar);
+    border: 1px solid var(--border-color);
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.calendar-day:hover {
+    background-color: var(--hover-color);
+    border-color: var(--accent-gold);
+    transform: translateY(-2px);
+}
+
+.calendar-day:focus-visible {
+    outline: 2px solid var(--accent-gold);
+    outline-offset: 2px;
+}
+
+
+/* ==========================================
+   35. DATE NUMBERS
+========================================== */
+
+.calendar-day-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    color: var(--text-primary);
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+
+    border-radius: 50%;
+}
+
+.calendar-day.today .calendar-day-number {
+    background-color: var(--accent-gold);
+    color: var(--bg-primary);
+    font-weight: bold;
+}
+
+.calendar-day.selected {
+    border-color: var(--accent-gold);
+    background-color: #574232;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(197, 165, 114, 0.3);
+}
+
+.calendar-day.selected:not(.today) .calendar-day-number {
+    color: var(--accent-gold);
+}
+
+.calendar-day.other-month {
+    opacity: 0.4;
+}
+
+.calendar-day.other-month:hover {
+    opacity: 0.8;
+}
+
+
+/* ==========================================
+   36. TASK DEADLINES INSIDE CALENDAR
+========================================== */
+
+.calendar-day-events {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.calendar-event {
+    display: block;
+    width: 100%;
+
+    padding: 7px 8px;
+
+    border: 1px solid transparent;
+    border-radius: 5px;
+
+    font-size: 11px;
+    line-height: 1.4;
+    text-align: left;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    cursor: pointer;
+
+    transition:
+        filter 0.2s ease,
+        transform 0.2s ease;
+}
+
+.calendar-event:hover {
+    filter: brightness(1.2);
+    transform: translateY(-1px);
+}
+
+.calendar-event.high {
+    background-color: #70433B;
+    border-color: #936056;
+    color: #F5C3B9;
+}
+
+.calendar-event.medium {
+    background-color: #685337;
+    border-color: #8B714B;
+    color: #F0D5A3;
+}
+
+.calendar-event.low {
+    background-color: #425348;
+    border-color: #587562;
+    color: #C5E0CC;
+}
+
+.calendar-event.completed {
+    background-color: #4A443E;
+    border-color: #6C6258;
+    color: #B8A795;
+
+    text-decoration: line-through;
+}
+
+.calendar-more-events {
+    color: var(--accent-gold);
+    font-size: 11px;
+    padding: 4px 2px;
+}
+
+
+/* ==========================================
+   37. CALENDAR LOWER PANELS
+========================================== */
+
+.calendar-bottom {
+    align-items: start;
+}
+
+.calendar-day-widget,
+.calendar-upcoming-widget {
+    min-height: 300px;
+}
+
+.calendar-day-subtitle {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: 12px;
+}
+
+.calendar-day-tasks,
+.calendar-upcoming-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    list-style: none;
+    margin-top: 22px;
+}
+
+
+/* ==========================================
+   38. SELECTED DAY TASK CARDS
+========================================== */
+
+.calendar-task-item,
+.calendar-upcoming-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px;
+
+    background-color: var(--bg-sidebar);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.calendar-task-info {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    min-width: 0;
+    flex: 1;
+}
+
+.calendar-task-title {
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.calendar-task-item.completed .calendar-task-title,
+.calendar-upcoming-item.completed .calendar-task-title {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.calendar-task-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    align-items: center;
+}
+
+.calendar-task-subject {
+    color: var(--accent-gold);
+    font-size: 11px;
+}
+
+.calendar-task-priority {
+    display: inline-block;
+    padding: 4px 7px;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+.calendar-task-priority.high {
+    background-color: #70433B;
+    color: #F5C3B9;
+}
+
+.calendar-task-priority.medium {
+    background-color: #685337;
+    color: #F0D5A3;
+}
+
+.calendar-task-priority.low {
+    background-color: #425348;
+    color: #C5E0CC;
+}
+
+.calendar-task-edit {
+    flex-shrink: 0;
+    padding: 8px 12px;
+
+    background-color: var(--border-color);
+    color: var(--text-primary);
+
+    font-size: 12px;
+}
+
+
+/* ==========================================
+   39. ADD TASK TO SELECTED DAY
+========================================== */
+
+.calendar-add-day-task {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 22px;
+    padding: 11px 17px;
+
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   40. UPCOMING DEADLINES
+========================================== */
+
+.calendar-upcoming-date {
+    color: var(--accent-gold);
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.calendar-upcoming-item.overdue {
+    border-color: #936056;
+}
+
+.calendar-upcoming-item.overdue .calendar-upcoming-date {
+    color: #F5C3B9;
+}
+
+
+/* ==========================================
+   41. CALENDAR RESPONSIVE DESIGN
+========================================== */
+
+@media (max-width: 1200px) {
+
+    .calendar-widget {
+        padding: 22px;
+    }
+
+    .calendar-day {
+        min-height: 110px;
+        padding: 9px;
+    }
+
+    .calendar-event {
+        padding: 6px;
+        font-size: 10px;
+    }
+
+}
+
+@media (max-width: 900px) {
+
+    .calendar-weekdays,
+    .calendar-grid {
+        gap: 5px;
+    }
+
+    .calendar-weekdays span {
+        font-size: 11px;
+    }
+
+    .calendar-day {
+        min-height: 90px;
+        padding: 7px;
+    }
+
+    .calendar-day-number {
+        width: 26px;
+        height: 26px;
+        font-size: 12px;
+    }
+
+    .calendar-event {
+        font-size: 9px;
+        padding: 5px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .calendar-widget {
+        padding: 14px;
+    }
+
+    .calendar-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .calendar-month-heading h2 {
+        font-size: 25px;
+    }
+
+    .calendar-navigation {
+        width: 100%;
+    }
+
+    .calendar-today-button {
+        margin-right: auto;
+    }
+
+    .calendar-weekdays span {
+        font-size: 0;
+        padding: 10px 0;
+    }
+
+    .calendar-weekdays span::first-letter {
+        font-size: 12px;
+    }
+
+    .calendar-day {
+        min-height: 65px;
+        padding: 5px;
+        gap: 4px;
+        border-radius: 6px;
+    }
+
+    .calendar-day-number {
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
+    }
+
+    .calendar-day-events {
+        gap: 3px;
+    }
+
+    .calendar-event {
+        height: 6px;
+        padding: 0;
+        border-radius: 3px;
+        font-size: 0;
+    }
+
+    .calendar-more-events {
+        font-size: 9px;
+        text-align: center;
+    }
+
+    .calendar-task-item,
+    .calendar-upcoming-item {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .calendar-day,
+    .calendar-event {
+        transition: none;
+    }
+
+    .calendar-day:hover,
+    .calendar-event:hover {
+        transform: none;
+    }
+
+}
+
+/* ==========================================
+   THE SCHOLAR'S DESK
+   Version 0.6 - The Library
+========================================== */
+
+
+/* ==========================================
+   45. LIBRARY PAGE
+========================================== */
+
+.library-stats {
+    margin-bottom: 25px;
+}
+
+.library-widget {
+    padding: 30px;
+    min-height: 420px;
+}
+
+
+/* ==========================================
+   46. LIBRARY TOOLBAR
+========================================== */
+
+.library-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 18px;
+
+    margin-bottom: 25px;
+}
+
+#library-search {
+    flex: 1;
+    min-width: 220px;
+    max-width: 360px;
+
+    padding: 13px 16px;
+
+    background-color: var(--bg-sidebar);
+    color: var(--text-primary);
+
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#library-search::placeholder {
+    color: var(--text-muted);
+}
+
+#library-search:focus {
+    border-color: var(--accent-gold);
+
+    box-shadow:
+        0 0 0 3px rgba(197, 165, 114, 0.12);
+}
+
+
+/* ==========================================
+   47. LIBRARY FILTER TABS
+========================================== */
+
+.library-filter-tabs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.library-filter {
+    padding: 11px 16px;
+
+    background-color: var(--bg-sidebar);
+    color: var(--text-muted);
+
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+
+    font-family: inherit;
+    font-size: 12px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.library-filter:hover {
+    background-color: var(--hover-color);
+    color: var(--text-primary);
+}
+
+.library-filter.active {
+    background-color: var(--accent-gold);
+    color: var(--bg-primary);
+
+    border-color: var(--accent-gold);
+    font-weight: 600;
+}
+
+
+/* ==========================================
+   48. BOOKSHELF GRID
+========================================== */
+
+.library-book-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(205px, 1fr));
+
+    gap: 26px;
+
+    margin-top: 28px;
+}
+
+
+/* ==========================================
+   49. BOOK CARD
+========================================== */
+
+.library-book-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    overflow: hidden;
+
+    background-color: var(--bg-sidebar);
+
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.library-book-card:hover {
+    transform: translateY(-5px);
+
+    border-color: var(--accent-gold);
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.22);
+}
+
+
+/* ==========================================
+   50. BOOK COVER
+========================================== */
+
+.library-book-cover {
+    position: relative;
+
+    width: 100%;
+    height: 260px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #604936 0%,
+            #352820 55%,
+            #241B16 100%
+        );
+
+    border-bottom: 1px solid var(--border-color);
+}
+
+.library-book-cover img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    display: block;
+
+    transition: transform 0.35s ease;
+}
+
+.library-book-card:hover .library-book-cover img {
+    transform: scale(1.045);
+}
+
+
+/* ==========================================
+   51. BOOK COVER PLACEHOLDER
+========================================== */
+
+.library-book-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 25px;
+
+    text-align: center;
+}
+
+.library-book-placeholder-icon {
+    color: var(--accent-gold);
+    font-size: 46px;
+    line-height: 1;
+}
+
+.library-book-placeholder-title {
+    color: var(--text-primary);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 19px;
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+.library-book-placeholder-author {
+    color: var(--text-muted);
+
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+
+
+/* ==========================================
+   52. READING STATUS RIBBON
+========================================== */
+
+.library-status-badge {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    padding: 7px 10px;
+
+    border-radius: 5px;
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+
+    backdrop-filter: blur(5px);
+}
+
+.library-status-badge.want {
+    background-color: rgba(71, 57, 47, 0.95);
+    color: #E8D5B5;
+}
+
+.library-status-badge.reading {
+    background-color: rgba(101, 79, 43, 0.95);
+    color: #F5DDA4;
+}
+
+.library-status-badge.finished {
+    background-color: rgba(54, 88, 67, 0.95);
+    color: #C7E6CE;
+}
+
+
+/* ==========================================
+   53. BOOK INFORMATION
+========================================== */
+
+.library-book-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 9px;
+
+    padding: 18px;
+}
+
+.library-book-title {
+    color: var(--text-primary);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1.35;
+
+    overflow-wrap: anywhere;
+}
+
+.library-book-author {
+    color: var(--text-muted);
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.library-book-rating {
+    color: var(--accent-gold);
+
+    font-size: 17px;
+    letter-spacing: 2px;
+    line-height: 1.4;
+}
+
+.library-book-rating.empty {
+    color: var(--text-muted);
+    font-size: 11px;
+    letter-spacing: 0;
+}
+
+
+/* ==========================================
+   54. READING PROGRESS
+========================================== */
+
+.library-progress-section {
+    margin-top: auto;
+    padding-top: 12px;
+}
+
+.library-progress-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 9px;
+}
+
+.library-progress-heading span {
+    color: var(--text-muted);
+    font-size: 11px;
+}
+
+.library-progress-heading strong {
+    color: var(--accent-gold);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.library-progress-track {
+    width: 100%;
+    height: 7px;
+
+    overflow: hidden;
+
+    background-color: #2C211B;
+    border-radius: 20px;
+}
+
+.library-progress-fill {
+    width: 0%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #9C7A4D,
+            var(--accent-gold),
+            #E4C993
+        );
+
+    border-radius: inherit;
+
+    transition: width 0.35s ease;
+}
+
+.library-progress-pages {
+    color: var(--text-muted);
+    font-size: 11px;
+
+    margin-top: 8px;
+}
+
+
+/* ==========================================
+   55. BOOK CARD ACTIONS
+========================================== */
+
+.library-book-actions {
+    display: flex;
+    gap: 8px;
+
+    margin-top: 15px;
+}
+
+.library-book-edit,
+.library-book-delete {
+    flex: 1;
+
+    padding: 10px 12px;
+
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 12px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.library-book-edit {
+    background-color: var(--accent-gold);
+    color: var(--bg-primary);
+
+    border: 1px solid var(--accent-gold);
+}
+
+.library-book-edit:hover {
+    background-color: #E0C18B;
+}
+
+.library-book-delete {
+    background-color: transparent;
+    color: var(--text-muted);
+
+    border: 1px solid var(--border-color);
+}
+
+.library-book-delete:hover {
+    background-color: #70433B;
+    color: #F5C3B9;
+
+    border-color: #936056;
+}
+
+
+/* ==========================================
+   56. EMPTY BOOKSHELF
+========================================== */
+
+.library-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+
+    min-height: 300px;
+
+    padding: 40px 20px;
+
+    text-align: center;
+}
+
+.library-empty-icon {
+    font-size: 55px;
+    line-height: 1.2;
+
+    margin-bottom: 8px;
+}
+
+.library-empty h3 {
+    color: var(--text-primary);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 25px;
+    font-weight: normal;
+}
+
+.library-empty p {
+    color: var(--text-muted);
+
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.library-empty button {
+    margin-top: 10px;
+}
+
+
+/* ==========================================
+   57. BOOK MODAL
+========================================== */
+
+.book-modal {
+    width: min(600px, calc(100% - 30px));
+    max-height: 88vh;
+
+    overflow-y: auto;
+}
+
+.book-modal .modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.book-modal textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.book-modal input:focus,
+.book-modal textarea:focus,
+.book-modal select:focus {
+    outline: 1px solid var(--accent-gold);
+    border-color: var(--accent-gold);
+}
+
+
+/* ==========================================
+   58. LIBRARY RESPONSIVE DESIGN
+========================================== */
+
+@media (max-width: 1100px) {
+
+    .library-book-grid {
+        grid-template-columns:
+            repeat(auto-fill, minmax(180px, 1fr));
+
+        gap: 18px;
+    }
+
+    .library-book-cover {
+        height: 240px;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .library-widget {
+        padding: 20px;
+    }
+
+    .library-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #library-search {
+        max-width: none;
+        width: 100%;
+    }
+
+    .library-filter-tabs {
+        width: 100%;
+    }
+
+    .library-filter {
+        flex: 1;
+        text-align: center;
+    }
+
+    .library-book-grid {
+        grid-template-columns:
+            repeat(auto-fill, minmax(160px, 1fr));
+
+        gap: 15px;
+    }
+
+    .library-book-cover {
+        height: 220px;
+    }
+
+    .library-book-info {
+        padding: 14px;
+    }
+
+    .library-book-title {
+        font-size: 16px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .library-book-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+    .library-book-cover {
+        height: 190px;
+    }
+
+    .library-book-info {
+        padding: 11px;
+    }
+
+    .library-book-title {
+        font-size: 15px;
+    }
+
+    .library-book-actions {
+        flex-direction: column;
+    }
+
+    .library-status-badge {
+        top: 8px;
+        right: 8px;
+
+        padding: 5px 7px;
+        font-size: 9px;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .library-book-card,
+    .library-book-cover img,
+    .library-progress-fill {
+        transition: none;
+    }
+
+    .library-book-card:hover,
+    .library-book-card:hover .library-book-cover img {
+        transform: none;
+    }
+
+}
+
+
+/* ==========================================
+   59. KEEP HIDDEN ELEMENTS HIDDEN
+========================================== */
+
+.library-empty[hidden] {
+    display: none;
+}
+
+/* ==========================================
+   THE SCHOLAR'S DESK
+   Version 0.7 - The Study Journal
+========================================== */
+
+
+/* ==========================================
+   60. JOURNAL STATISTICS
+========================================== */
+
+.journal-stats {
+    margin-bottom: 30px;
+}
+
+
+/* ==========================================
+   61. JOURNAL WORKSPACE LAYOUT
+========================================== */
+
+.journal-workspace {
+    display: grid;
+    grid-template-columns: 290px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+    margin-bottom: 28px;
+}
+
+.journal-notes-panel,
+.journal-editor-panel {
+    min-width: 0;
+    border: 1px solid rgba(189, 157, 112, 0.18);
+    border-radius: 16px;
+    background: #211c1a;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+.journal-notes-panel {
+    padding: 22px 18px;
+    min-height: 650px;
+}
+
+.journal-editor-panel {
+    overflow: hidden;
+    min-height: 650px;
+}
+
+
+/* ==========================================
+   62. NOTES PANEL HEADING
+========================================== */
+
+.journal-panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.journal-panel-heading h2 {
+    margin: 5px 0 0;
+    font-size: 23px;
+    font-family: Georgia, "Times New Roman", serif;
+    color: #f1e3cf;
+}
+
+.journal-panel-heading .eyebrow {
+    margin: 0;
+}
+
+
+/* ==========================================
+   63. SEARCH AND SUBJECT FILTER
+========================================== */
+
+.journal-search,
+.journal-subject-filter {
+    width: 100%;
+    min-width: 0;
+    padding: 12px 13px;
+    border: 1px solid rgba(189, 157, 112, 0.24);
+    border-radius: 9px;
+    background: #302925;
+    color: #f0e4d3;
+    font: inherit;
+    font-size: 13px;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.journal-search::placeholder {
+    color: #a89a8d;
+}
+
+.journal-search:focus,
+.journal-subject-filter:focus {
+    border-color: #c9a676;
+    box-shadow: 0 0 0 3px rgba(201, 166, 118, 0.12);
+}
+
+.journal-filter-label {
+    display: block;
+    margin: 22px 0 9px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    color: #b9a48b;
+}
+
+.journal-subject-filter {
+    cursor: pointer;
+}
+
+
+/* ==========================================
+   64. NOTE FILTER BUTTONS
+========================================== */
+
+.journal-filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 22px 0 18px;
+}
+
+.journal-filter {
+    padding: 8px 11px;
+    border: 1px solid rgba(189, 157, 112, 0.18);
+    border-radius: 7px;
+    background: transparent;
+    color: #b9aa9b;
+    font: inherit;
+    font-size: 11px;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.journal-filter:hover {
+    color: #f1e3cf;
+    border-color: #a88b64;
+}
+
+.journal-filter.active {
+    background: #8b6849;
+    color: #fff4e5;
+    border-color: #8b6849;
+}
+
+
+/* ==========================================
+   65. NOTES ARCHIVE LIST
+========================================== */
+
+.journal-notes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 640px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.journal-notes-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.journal-notes-list::-webkit-scrollbar-thumb {
+    background: #685240;
+    border-radius: 10px;
+}
+
+.journal-note-card {
+    display: block;
+    width: 100%;
+    padding: 15px 14px;
+    border: 1px solid rgba(189, 157, 112, 0.15);
+    border-radius: 10px;
+    background: #2c2521;
+    color: inherit;
+    text-align: left;
+    font: inherit;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.journal-note-card:hover {
+    background: #392e27;
+    border-color: rgba(201, 166, 118, 0.4);
+    transform: translateY(-2px);
+}
+
+.journal-note-card.active {
+    background: #403126;
+    border-color: #b99163;
+    box-shadow: inset 3px 0 0 #c5a173;
+}
+
+.journal-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 9px;
+}
+
+.journal-card-subject {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #c9a676;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.journal-card-pin {
+    flex-shrink: 0;
+    font-size: 15px;
+    color: #d4ae72;
+}
+
+.journal-card-title {
+    margin: 0 0 7px;
+    font-size: 15px;
+    line-height: 1.4;
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 600;
+    color: #f1e3cf;
+    overflow-wrap: anywhere;
+}
+
+.journal-card-preview {
+    margin: 0 0 12px;
+    color: #ad9e90;
+    font-size: 12px;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.journal-card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.journal-card-date {
+    color: #9f8e7d;
+    font-size: 10px;
+}
+
+.journal-card-status {
+    display: inline-block;
+    padding: 4px 7px;
+    border-radius: 5px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.journal-card-status.revision {
+    background: rgba(190, 126, 84, 0.16);
+    color: #e0ab83;
+}
+
+.journal-card-status.mastered {
+    background: rgba(123, 155, 117, 0.17);
+    color: #afc7a2;
+}
+
+
+/* ==========================================
+   66. EMPTY NOTES ARCHIVE
+========================================== */
+
+.journal-list-empty {
+    padding: 40px 15px;
+    text-align: center;
+    color: #b9a99a;
+}
+
+.journal-empty-icon {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 34px;
+}
+
+.journal-list-empty h3 {
+    margin: 0 0 9px;
+    color: #e9d9c4;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+}
+
+.journal-list-empty p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+
+/* ==========================================
+   67. EDITOR EMPTY STATE
+========================================== */
+
+.journal-editor-empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 650px;
+    padding: 50px 25px;
+    text-align: center;
+}
+
+.journal-editor-empty-icon {
+    margin-bottom: 22px;
+    font-size: 56px;
+    color: #c6a577;
+}
+
+.journal-editor-empty .eyebrow {
+    margin-bottom: 14px;
+}
+
+.journal-editor-empty h2 {
+    margin: 0 0 15px;
+    color: #f1e3cf;
+    font-size: clamp(26px, 3vw, 36px);
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.journal-editor-empty > p:not(.eyebrow) {
+    max-width: 350px;
+    margin: 0 0 27px;
+    color: #b8a89a;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   68. EDITOR WORKSPACE
+========================================== */
+
+.journal-editor-workspace {
+    display: flex;
+    flex-direction: column;
+    min-height: 650px;
+}
+
+.journal-editor-workspace[hidden],
+.journal-editor-empty[hidden],
+.journal-list-empty[hidden] {
+    display: none !important;
+}
+
+
+/* ==========================================
+   69. EDITOR TOP BAR
+========================================== */
+
+.journal-editor-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(189, 157, 112, 0.16);
+}
+
+.journal-editor-topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.journal-document-icon {
+    font-size: 20px;
+}
+
+.journal-document-label {
+    color: #c6a577;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.7px;
+}
+
+.journal-editor-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.journal-icon-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(189, 157, 112, 0.17);
+    border-radius: 8px;
+    background: #302823;
+    color: #dfc9ab;
+    font: inherit;
+    font-size: 21px;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.journal-icon-button:hover {
+    background: #48372c;
+    border-color: #ad8b63;
+}
+
+.journal-icon-button.active {
+    background: #725336;
+    border-color: #c8a371;
+    color: #fff2d9;
+}
+
+.journal-delete-button:hover {
+    background: #63352f;
+    border-color: #bd786d;
+    color: #ffe1d8;
+}
+
+
+/* ==========================================
+   70. NOTE METADATA
+========================================== */
+
+.journal-note-metadata {
+    padding: 25px 30px 24px;
+    border-bottom: 1px solid rgba(189, 157, 112, 0.15);
+}
+
+.journal-note-title {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0 0 24px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #f3e6d3;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(26px, 3vw, 35px);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.journal-note-title::placeholder {
+    color: #8f8072;
+}
+
+.journal-metadata-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.journal-metadata-field {
+    min-width: 0;
+}
+
+.journal-metadata-field label {
+    display: block;
+    margin-bottom: 9px;
+    color: #bca78e;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+}
+
+.journal-metadata-field input,
+.journal-metadata-field select {
+    width: 100%;
+    min-width: 0;
+    padding: 11px 12px;
+    border: 1px solid rgba(189, 157, 112, 0.24);
+    border-radius: 8px;
+    background: #302823;
+    color: #eee0cf;
+    font: inherit;
+    font-size: 13px;
+    outline: none;
+}
+
+.journal-metadata-field input:focus,
+.journal-metadata-field select:focus {
+    border-color: #c9a676;
+    box-shadow: 0 0 0 3px rgba(201, 166, 118, 0.1);
+}
+
+.journal-metadata-field input::placeholder {
+    color: #a09386;
+}
+
+
+/* ==========================================
+   71. WORD-STYLE FORMATTING TOOLBAR
+========================================== */
+
+.journal-toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    padding: 13px 20px;
+    background: #332923;
+    border-bottom: 1px solid rgba(189, 157, 112, 0.22);
+}
+
+.journal-toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.journal-toolbar-divider {
+    display: inline-block;
+    width: 1px;
+    height: 25px;
+    margin: 0 4px;
+    background: rgba(213, 181, 137, 0.2);
+}
+
+.journal-style-select {
+    width: 132px;
+    padding: 9px 8px;
+    border: 1px solid rgba(189, 157, 112, 0.25);
+    border-radius: 6px;
+    background: #45362c;
+    color: #f2e2ce;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    outline: none;
+}
+
+.journal-format-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 33px;
+    height: 33px;
+    padding: 5px 8px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: transparent;
+    color: #e2cfb5;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15px;
+    cursor: pointer;
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.journal-format-button:hover {
+    background: #564234;
+    border-color: rgba(201, 166, 118, 0.25);
+}
+
+.journal-format-button.active {
+    background: #77563c;
+    border-color: #b99465;
+    color: #fff4df;
+}
+
+.journal-highlight-button {
+    color: #e9c16d;
+    font-size: 20px;
+}
+
+
+/* ==========================================
+   72. PARCHMENT WRITING PAGE
+========================================== */
+
+.journal-paper-container {
+    flex: 1;
+    padding: 34px 30px 45px;
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(255, 255, 255, 0.025),
+            transparent 40%
+        ),
+        #27201c;
+}
+
+.journal-note-content {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 540px;
+    padding: 50px clamp(25px, 5vw, 65px);
+    border: 1px solid #c4ad8c;
+    border-radius: 3px;
+    outline: none;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.32),
+            transparent 45%
+        ),
+        #e9dcc4;
+    color: #352b24;
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.24),
+        inset 0 0 30px rgba(112, 82, 47, 0.035);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+    overflow-x: auto;
+    caret-color: #7b4c31;
+}
+
+.journal-note-content:focus {
+    border-color: #d1ad79;
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.24),
+        0 0 0 3px rgba(201, 166, 118, 0.13);
+}
+
+.journal-note-content:empty::before {
+    content: attr(data-placeholder);
+    color: #a59680;
+    pointer-events: none;
+}
+
+.journal-note-content h1,
+.journal-note-content h2,
+.journal-note-content h3 {
+    color: #3d2c23;
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.4;
+}
+
+.journal-note-content h1 {
+    margin: 0.9em 0 0.45em;
+    font-size: 30px;
+}
+
+.journal-note-content h2 {
+    margin: 0.9em 0 0.4em;
+    font-size: 24px;
+}
+
+.journal-note-content h3 {
+    margin: 0.8em 0 0.35em;
+    font-size: 19px;
+}
+
+.journal-note-content p {
+    margin: 0 0 1em;
+}
+
+.journal-note-content ul,
+.journal-note-content ol {
+    margin: 0.8em 0 1.2em;
+    padding-left: 30px;
+}
+
+.journal-note-content li {
+    margin-bottom: 5px;
+}
+
+.journal-note-content blockquote {
+    margin: 20px 0;
+    padding: 12px 20px;
+    border-left: 4px solid #a47b52;
+    background: rgba(143, 105, 66, 0.1);
+    color: #5a4130;
+    font-style: italic;
+}
+
+.journal-note-content a {
+    color: #765037;
+    text-decoration: underline;
+}
+
+.journal-note-content pre {
+    padding: 16px;
+    border-radius: 7px;
+    background: #332b25;
+    color: #f1dfc6;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+}
+
+.journal-note-content code {
+    font-family: "Courier New", monospace;
+}
+
+.journal-note-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+.journal-note-content hr {
+    border: none;
+    border-top: 1px solid #b8a386;
+    margin: 25px 0;
+}
+
+
+/* ==========================================
+   73. EDITOR FOOTER
+========================================== */
+
+.journal-editor-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+    padding: 14px 24px;
+    border-top: 1px solid rgba(189, 157, 112, 0.16);
+    background: #29221e;
+}
+
+.journal-save-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #bca88f;
+    font-size: 12px;
+}
+
+.journal-save-indicator.saving {
+    color: #e1bd83;
+}
+
+.journal-save-indicator.saved {
+    color: #b1c49c;
+}
+
+.journal-save-indicator.error {
+    color: #e5a18f;
+}
+
+.journal-editor-details {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #a99785;
+    font-size: 11px;
+}
+
+.journal-footer-separator {
+    color: #715c49;
+}
+
+
+/* ==========================================
+   74. JOURNAL BACKUP BAR
+========================================== */
+
+.journal-backup-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 22px 26px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(189, 157, 112, 0.19);
+    border-radius: 12px;
+    background: #29221e;
+}
+
+.journal-backup-bar strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #eddbc3;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px;
+}
+
+.journal-backup-bar p {
+    margin: 0;
+    color: #b3a18e;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.journal-backup-bar button {
+    flex-shrink: 0;
+}
+
+
+/* ==========================================
+   75. JOURNAL ACCESSIBILITY
+========================================== */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.journal-note-card:focus-visible,
+.journal-filter:focus-visible,
+.journal-format-button:focus-visible,
+.journal-icon-button:focus-visible {
+    outline: 2px solid #d7b887;
+    outline-offset: 3px;
+}
+
+
+/* ==========================================
+   76. RESPONSIVE JOURNAL
+========================================== */
+
+@media (max-width: 1100px) {
+
+    .journal-workspace {
+        grid-template-columns: 245px minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .journal-notes-panel {
+        padding: 18px 13px;
+    }
+
+    .journal-note-metadata {
+        padding: 22px;
+    }
+
+    .journal-paper-container {
+        padding: 24px 18px 35px;
+    }
+
+    .journal-note-content {
+        padding: 35px 30px;
+    }
+
+}
+
+@media (max-width: 850px) {
+
+    .journal-workspace {
+        grid-template-columns: 1fr;
+    }
+
+    .journal-notes-panel {
+        min-height: auto;
+    }
+
+    .journal-notes-list {
+        max-height: 280px;
+    }
+
+    .journal-editor-panel {
+        min-height: 550px;
+    }
+
+    .journal-editor-empty {
+        min-height: 550px;
+    }
+
+    .journal-editor-workspace {
+        min-height: 550px;
+    }
+
+    .journal-note-content {
+        min-height: 440px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .journal-note-metadata {
+        padding: 20px 16px;
+    }
+
+    .journal-metadata-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .journal-toolbar {
+        gap: 5px;
+        padding: 12px;
+    }
+
+    .journal-toolbar-divider {
+        margin: 0 2px;
+    }
+
+    .journal-style-select {
+        width: 120px;
+    }
+
+    .journal-paper-container {
+        padding: 15px 10px 25px;
+    }
+
+    .journal-note-content {
+        min-height: 420px;
+        padding: 25px 20px;
+        font-size: 15px;
+    }
+
+    .journal-editor-topbar {
+        padding: 13px 15px;
+    }
+
+    .journal-editor-footer {
+        padding: 13px 15px;
+    }
+
+    .journal-backup-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .journal-backup-bar button {
+        width: 100%;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .journal-note-card,
+    .journal-filter,
+    .journal-format-button,
+    .journal-icon-button {
+        transition: none;
+    }
+
+}
+
+
+/* ==========================================
+   77. KEEP HIDDEN ELEMENTS HIDDEN
+========================================== */
+
+.journal-notes-panel [hidden],
+.journal-editor-panel [hidden] {
+    display: none !important;
+}
+
+
+/* ==========================================
+   THE SCHOLAR'S DESK
+   Version 0.8 - Settings & Personalisation
+========================================== */
+
+
+/* ==========================================
+   78. SETTINGS PAGE LAYOUT
+========================================== */
+
+.settings-stats {
+    margin-bottom: 25px;
+}
+
+.settings-grid {
+    align-items: start;
+    margin-bottom: 25px;
+}
+
+.settings-panel {
+    min-width: 0;
+    padding: 30px;
+}
+
+.settings-panel .widget-heading {
+    margin-bottom: 18px;
+}
+
+.settings-panel .widget-heading h2 {
+    margin-top: 10px;
+    font-size: 25px;
+}
+
+.settings-panel > .subtitle {
+    margin-bottom: 25px;
+}
+
+.settings-panel h3 {
+    color: var(--text-primary);
+    font-size: 19px;
+    font-weight: normal;
+    line-height: 1.5;
+}
+
+.settings-panel .card-note {
+    line-height: 1.7;
+}
+
+
+/* ==========================================
+   79. BACKUP & RESTORE PANEL
+========================================== */
+
+.settings-action-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 25px 0;
+}
+
+.settings-action-group button {
+    padding: 14px 22px;
+    font-size: 13px;
+}
+
+.settings-panel-divider {
+    height: 1px;
+    width: 100%;
+    margin: 28px 0;
+
+    background-color: var(--border-color);
+}
+
+.settings-backup-panel > h3 {
+    margin-bottom: 10px;
+}
+
+.settings-backup-panel > label {
+    display: block;
+    margin: 22px 0 10px;
+
+    color: var(--accent-gold);
+    font-size: 13px;
+}
+
+#settings-import-file {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+
+    padding: 14px;
+
+    background-color: var(--bg-sidebar);
+    color: var(--text-primary);
+
+    border: 1px dashed var(--accent-gold);
+    border-radius: 9px;
+
+    font-size: 12px;
+    cursor: pointer;
+}
+
+#settings-import-file::file-selector-button {
+    margin-right: 14px;
+    padding: 9px 13px;
+
+    background-color: var(--accent-gold);
+    color: var(--bg-primary);
+
+    border: none;
+    border-radius: 5px;
+
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+#settings-import-file:hover {
+    background-color: var(--hover-color);
+}
+
+#settings-backup-message {
+    margin-top: 18px;
+    overflow-wrap: anywhere;
+}
+
+
+/* ==========================================
+   80. BACKUP IMPORT PREVIEW
+========================================== */
+
+.settings-import-preview {
+    margin-top: 22px;
+    padding: 20px;
+
+    background-color: var(--bg-sidebar);
+
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+}
+
+.settings-import-preview h3 {
+    color: var(--accent-gold);
+    margin-bottom: 12px;
+}
+
+#settings-import-filename {
+    color: var(--text-primary);
+    font-size: 13px;
+    overflow-wrap: anywhere;
+    margin-bottom: 15px;
+}
+
+#settings-import-summary {
+    list-style: none;
+    margin-bottom: 18px;
+}
+
+#settings-import-summary li {
+    padding: 9px 0;
+
+    color: var(--text-muted);
+    font-size: 13px;
+
+    border-bottom: 1px solid var(--border-color);
+}
+
+.settings-import-preview .card-note {
+    margin: 15px 0;
+}
+
+.settings-import-preview button {
+    margin: 5px 8px 5px 0;
+    font-size: 12px;
+    padding: 11px 15px;
+}
+
+.settings-import-preview button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* ==========================================
+   81. APPEARANCE SETTINGS
+========================================== */
+
+.settings-theme-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    margin: 0;
+    padding: 0;
+
+    border: none;
+}
+
+.settings-theme-options legend {
+    color: var(--accent-gold);
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.settings-theme-option {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 18px;
+
+    background-color: var(--bg-sidebar);
+
+    border: 1px solid var(--border-color);
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.settings-theme-option:hover {
+    background-color: var(--hover-color);
+    border-color: var(--accent-gold);
+    transform: translateY(-2px);
+}
+
+.settings-theme-option:has(input:checked) {
+    border-color: var(--accent-gold);
+
+    box-shadow:
+        inset 0 0 0 1px rgba(197, 165, 114, 0.25);
+}
+
+.settings-theme-option input {
+    width: 17px;
+    height: 17px;
+
+    flex-shrink: 0;
+    accent-color: var(--accent-gold);
+}
+
+.settings-theme-option span {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.settings-theme-option strong {
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.settings-theme-option small {
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.settings-checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 25px;
+    padding: 15px 0;
+
+    color: var(--text-primary);
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+.settings-checkbox-row input {
+    width: 17px;
+    height: 17px;
+
+    flex-shrink: 0;
+    accent-color: var(--accent-gold);
+}
+
+#settings-appearance-message {
+    margin-top: 12px;
+}
+
+
+/* ==========================================
+   82. PERSONALISATION FORM
+========================================== */
+
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.settings-form label {
+    color: var(--accent-gold);
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.settings-form input {
+    width: 100%;
+    min-width: 0;
+
+    padding: 13px 15px;
+
+    background-color: var(--bg-sidebar);
+    color: var(--text-primary);
+
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.settings-form input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+.settings-form input:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+
+    box-shadow:
+        0 0 0 3px rgba(197, 165, 114, 0.12);
+}
+
+.settings-form button {
+    align-self: flex-start;
+    margin-top: 12px;
+}
+
+#settings-personal-message {
+    margin-top: 8px;
+}
+
+
+/* ==========================================
+   83. DATA & STORAGE PANEL
+========================================== */
+
+.settings-storage-details {
+    display: flex;
+    flex-direction: column;
+
+    margin: 20px 0;
+}
+
+.settings-storage-details > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+
+    padding: 16px 0;
+
+    border-bottom: 1px solid var(--border-color);
+}
+
+.settings-storage-details dt {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.settings-storage-details dd {
+    color: var(--accent-gold);
+    font-size: 13px;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.settings-storage-panel > .card-note {
+    margin: 20px 0;
+}
+
+#settings-refresh-storage {
+    margin-top: 5px;
+}
+
+
+/* ==========================================
+   84. SETTINGS FOOTER
+========================================== */
+
+.settings-footer-note {
+    margin: 30px 0 15px;
+
+    color: var(--text-muted);
+    font-size: 13px;
+    font-style: italic;
+    text-align: center;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* ==========================================
+   85. MIDNIGHT LIBRARY THEME
+========================================== */
+
+body[data-theme="dark"] {
+    --bg-primary: #141316;
+    --bg-sidebar: #211E24;
+    --bg-card: #302B34;
+
+    --accent-gold: #D5B68A;
+
+    --text-primary: #F1E9E0;
+    --text-muted: #C0B1A8;
+
+    --border-color: #504650;
+    --hover-color: #403640;
+}
+
+/* Alternative attribute placement support */
+
+:root[data-theme="dark"] {
+    --bg-primary: #141316;
+    --bg-sidebar: #211E24;
+    --bg-card: #302B34;
+
+    --accent-gold: #D5B68A;
+
+    --text-primary: #F1E9E0;
+    --text-muted: #C0B1A8;
+
+    --border-color: #504650;
+    --hover-color: #403640;
+}
+
+
+/* ==========================================
+   86. REDUCED MOTION SETTING
+========================================== */
+
+body.reduce-motion *,
+body.reduce-motion *::before,
+body.reduce-motion *::after,
+:root.reduce-motion *,
+:root.reduce-motion *::before,
+:root.reduce-motion *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+}
+
+
+/* ==========================================
+   87. SETTINGS RESPONSIVE DESIGN
+========================================== */
+
+@media (max-width: 1050px) {
+
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .settings-panel {
+        padding: 22px;
+    }
+
+    .settings-panel .widget-heading h2 {
+        font-size: 22px;
+    }
+
+    .settings-action-group button {
+        width: 100%;
+    }
+
+    .settings-import-preview button {
+        width: 100%;
+        margin: 6px 0;
+    }
+
+    .settings-storage-details > div {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .settings-storage-details dd {
+        text-align: left;
+    }
+
+    .settings-form button {
+        width: 100%;
+    }
+
+    .settings-theme-option {
+        padding: 15px;
+    }
+
+}
+
+
+/* ==========================================
+   88. SETTINGS ACCESSIBILITY
+========================================== */
+
+.settings-theme-option:focus-within {
+    outline: 2px solid var(--accent-gold);
+    outline-offset: 3px;
+}
+
+#settings-import-file:focus-visible {
+    outline: 2px solid var(--accent-gold);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .settings-theme-option {
+        transition: none;
+    }
+
+    .settings-theme-option:hover {
+        transform: none;
+    }
+
+}
